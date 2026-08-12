@@ -1,5 +1,7 @@
 import tkinter
 import random
+score = 0
+ccore = 0
 def compare():
     if value == 1 and computer == 3:
         win()
@@ -8,7 +10,7 @@ def compare():
     elif value > computer:
         win()
     elif value == computer:
-        drawlabel = tkinter.Label (rpscreen, bg = 'white', fg = 'black', text = 'draw')
+        draw()
     else:
         lose()
 
@@ -19,21 +21,47 @@ rpscreen.config(bg = 'white')
 def press1():
     global value
     value = 3
+    compare()
 def press2():
     global value
     value = 2
+    compare()
 def press3():
     global value
     value = 1
+    compare()
 rpsabel = tkinter.Label (rpscreen, bg = 'white', fg = 'black', text = 'Rock Paper Scissors')
 rpsabel.place(x = 175, y = 25 )
 rpsutton1 = tkinter.Button (rpscreen, bg = '#DB776B', fg = 'black', text = 'Rock', command = press1)
 rpsutton1.place(x = 100, y =100 )
 rpsutton2 = tkinter.Button (rpscreen, bg = 'light grey', fg = 'black', text = 'Paper', command = press3)
 rpsutton2.place(x = 200, y =100 )
-rpsutton3 = tkinter.Button (rpscreen, bg = 'light blue', fg = 'black', text = 'Scissors' command = press2)
+rpsutton3 = tkinter.Button (rpscreen, bg = 'light blue', fg = 'black', text = 'Scissors', command = press2)
 rpsutton3.place(x = 300, y =100 )
 computer = random.randint(1,3)
 def win():
-    winlabel = tkinter.Label()
+    global score
+    winlabel = tkinter.Label(rpscreen, bg = 'white', fg = 'black', text = 'win')
+    winlabel.place(x = 250, y = 300)
+    score +=1
+    scoreboard = tkinter.Label (rpscreen, bg = 'white', fg = 'black', text = 'Your score:' + str(score) +  '\nComputer score:' + str(ccore))
+    scoreboard.place(x = 100, y = 200)
+    global computer
+    computer = random.randint(1, 3)
+def lose():
+    global ccore
+    loselabel = tkinter.Label(rpscreen, bg = 'white', fg = 'black', text = 'lose')
+    loselabel.place(x = 250, y = 300)
+    ccore +=1
+    scoreboard = tkinter.Label (rpscreen, bg = 'white', fg = 'black', text = 'Your score:' + str(score) + '\nComputer score:' + str(ccore))
+    scoreboard.place(x = 100, y = 200)
+    global computer
+    computer = random.randint(1, 3)
+def draw():
+    drawlabel = tkinter.Label (rpscreen, bg = 'white', fg = 'black', text = 'draw')
+    drawlabel.place(x = 250, y = 300)
+    scoreboard = tkinter.Label (rpscreen, bg = 'white', fg = 'black', text = 'Your score:' + str(score) +  '\nComputer score:' + str(ccore))
+    scoreboard.place(x = 100, y = 200)
+    global computer
+    computer = random.randint(1, 3)
 rpscreen.mainloop()
